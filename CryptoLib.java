@@ -109,7 +109,11 @@ return 0;
 	 * different output values the hash function can produce.
 	 **/
 	public static double HashCP(double n_samples, double size) {
-		return -1;
-	}
 
+				double prob = 1;
+
+				for(double i = size-(n_samples-1); i <= size-1; i++){
+					prob = prob *(i/size);
+				}
+				return 1-prob;
 }
