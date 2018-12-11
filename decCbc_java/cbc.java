@@ -3,7 +3,8 @@ import java.io.FileReader;
 
 import javax.xml.bind.DatatypeConverter;
 
-public class CBCXor {
+public class cbc {
+	private static byte[][] sortedBlocks;
 
 	public static void main(String[] args) {
 		String filename = "input.txt";
@@ -34,6 +35,53 @@ public class CBCXor {
 	 *            block is 12 bytes long.
 	 */
 	private static String recoverMessage(byte[] first_block, byte[] encrypted) {
+		sortedBlocks = sortBlocks(encrypted);
+		System.out.println(keyRecover(first_block));
+		System.out.println(first_block);
+
 		return new String(encrypted);
+
+	}
+	// M0 = 199305255870
+	// C0 = IV
+	//the first message m0 is known. Therefore the formula gives us:
+	// (IV + M0) + K = C0 ->
+	// K = C0 + (IV + M0), and therefore we can recover the key.
+
+	public static byte[] keyRecover(byte[] first_block){
+		byte [] IV = sortedBlocks[0];
+		byte [] C0 = sortedBlocks[1];
+		byte [] M0 = first_block;
+
+		return xorBlocks(C0, xorBlocks(IV,M0));
+	}
+
+	public static byte[] xorBlocks(byte[] block1, byte[] block2){
+
+		byte[] xorResult = new byte[12];
+
+		for(int i = 0; i<12; i++){
+			xorResult[i] = (byte) (0xff &(block1[i] ^ block2[i]));
+		}
+		return xorResult;
+	}
+
+	public static byte[][] sortBlocks(byte[] encrypted){
+		int i = 0;
+		int k = 0;
+		int encCounter = 0;
+		byte [][] sortedBlocks = new byte[encrypted.length/12][12];
+
+		while(i<(encrypted.length/12)){
+			 k = 0;
+			while(k<12){
+
+				sortedBlocks[i][k] = encrypted[encCounter];
+				encCounter ++;
+				k++;
+			}
+			i++;
+		}
+		return sortedBlocks;
 	}
 }
