@@ -61,7 +61,7 @@ public class cbc {
 		byte[] xorResult = new byte[12];
 
 		for(int i = 0; i<12; i++){
-			xorResult[i] = (byte) (0xff &(block1[i] ^ block2[i]));
+			xorResult[i] = (byte) (0xff & (block1[i] ^ block2[i]));
 		}
 		return xorResult;
 	}
