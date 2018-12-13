@@ -116,4 +116,5 @@ return 0;
 					prob = prob *(i/size);
 				}
 				return 1-prob;
+	}
 }
