@@ -63,6 +63,32 @@ public class FiatShamir {
 	private static BigInteger recoverSecret(BigInteger N, BigInteger X,
 			ProtocolRun[] runs) {
 		// TODO. Recover the secret value x such that x^2 = X (mod N).
+		ProtocolRun one = new ProtocolRun(null, 0, null);
+		ProtocolRun two = new ProtocolRun(null, 0, null);
+		for(int i = 0; i < runs.length; i++){
+			for(int j = i+1; j < runs.length; j++){
+				//If R are equal we can check if c differs, we want c=0
+				if(runs[i].R.equals(runs[j].R)){
+					if(runs[i].c == 0){
+						one = runs[i];
+						two = runs[j];
+					}else{
+						one = runs[j];
+						two = runs[i];
+					}
+				}
+			}
+		}
+		//if one.R is null then we know that there are no runs of equal R
+		if(one.R != null){
+			BigInteger inv = one.s.modInverse(N);
+			BigInteger x = inv.multiply(two.s).mod(N);
+			BigInteger publicKey = x.pow(2).mod(N);
+			if(publicKey.equals(X)){ //if x² = X then we found the secret key
+				return x;
+			}
+		}
+
 		return BigInteger.ZERO;
 	}
 }
