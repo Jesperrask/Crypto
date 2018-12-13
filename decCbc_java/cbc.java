@@ -35,12 +35,18 @@ public class cbc {
 	 *            block is 12 bytes long.
 	 */
 	private static String recoverMessage(byte[] first_block, byte[] encrypted) {
+		String message = "";
 		sortedBlocks = sortBlocks(encrypted);
-		System.out.println(keyRecover(first_block));
-		System.out.println(first_block);
 
-		return new String(encrypted);
+		byte [] key = keyRecover(first_block);
 
+		for(int i = 1; i<(encrypted.length / 12) - 1; i++){
+
+		byte [] mi = xorBlocks(key, xorBlocks(sortedBlocks[i], sortedBlocks[i-1]));
+		message += new String(mi);
+		}
+
+		return message;
 	}
 	// M0 = 199305255870
 	// C0 = IV
