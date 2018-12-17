@@ -1,3 +1,5 @@
+Personal nr: 9305255870
+Jesper Rask & Daniel Posch
 Approach:
 
 Not much to say about the implementations here, we followed all the mathematical definitions

@@ -1,0 +1,29 @@
+Personal nr: 9305255870
+Jesper Rask & Daniel Posch
+
+Approach:
+We were given three intercepted cipher texts, with known modulus and public key.
+The message were encrypted with the same public key, using different modulus. This
+resulted in :
+
+Z0 = C0 (mod0)
+Z1 = C1 (mod1)
+Z2 = C2 (mod2)
+
+We can use the chinese remainder to solve the congurence.
+
+-- Given x0 ≡ a1 mod n1
+-- and   x1 ≡ a2 mod n2
+--       x01 ≡ a  mod n1*n2
+
+-- a = a1 * n2 * m2 + a2 * n1 *m1
+-- m2 and m1 can be computed using EEA.
+-- m1*n1 + m2*n2 = 1
+
+when n1 and n2 are coprime.
+Bézout's identity asserts the existence of two integers m1 and m2 such that
+m1*n1 + m2*n2 = 1
+
+We also know the public key (3). We can use the cube root function provided, to recover the message.
+
+Output:Leonard Adleman
