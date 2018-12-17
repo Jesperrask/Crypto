@@ -56,9 +56,12 @@ public class ElGamal {
 
             for(int i = 1; i <= 999; i++){
               BigInteger millis = BigInteger.valueOf(i);
-                r = ye.multiply(BigInteger.valueOf(10).pow(10)).add(m.multiply(BigInteger.valueOf(10).pow(8))).add(d.multiply(BigInteger.valueOf(10).pow(6))).add(h.multiply(BigInteger.valueOf(10).pow(4))).add(min.multiply(BigInteger.valueOf(10).pow(2))).add(s).add(millis);
-                if(c1.mod(p).equals(g.modPow(r,p))){
-                  return r;
+              r = ye.multiply(BigInteger.valueOf(10).pow(10)).add(m.multiply(BigInteger.valueOf(10).pow(8))).add(d.multiply(BigInteger.valueOf(10).pow(6))).add(h.multiply(BigInteger.valueOf(10).pow(4))).add(min.multiply(BigInteger.valueOf(10).pow(2))).add(s).add(millis);
+
+              if(c1.mod(p).equals(g.modPow(r,p))){
+
+                return r;
+
                 }
               }
             return BigInteger.ZERO;
