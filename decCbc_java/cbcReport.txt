@@ -1,0 +1,25 @@
+Approach:
+The encrypted text, of the form IV | C0 | C1 | ... where each block is 12 bytes long.
+We where given the first value of the message, we knew the IV was at the beginning of the
+encrypted message. With this information, we can recover the key:
+
+M0 = 199305255870
+C0 = IV
+the first message m0 is known. Therefore the formula gives us:
+(IV + M0) + K = C0 ->
+K = C0 + (IV + M0)
+
+When we recovered the key, we can then decrypt the message. We structured the block in a
+way such that we can easily loop through them.
+
+A message mi can be recovered by some simple math from the definition given from the lectures, such
+that it looks like this:
+
+mi = (k + ci) + c(i-1).
+
+The key k is known, we have the ci and ci-1, and therefor we have everything to solve the value of each block.
+
+We did not really know if we were supposed to include the personal nr, but we did. If we don't want it, we
+just change the loop so it skips that block.
+
+Output: 199305255870 An eye for an eye only ends up making the whole world blind. - Mahatma G
