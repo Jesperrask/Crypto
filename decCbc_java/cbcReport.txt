@@ -1,3 +1,5 @@
+Personal nr: 9305255870
+Jesper Rask & Daniel Posch
 Approach:
 The encrypted text, of the form IV | C0 | C1 | ... where each block is 12 bytes long.
 We where given the first value of the message, we knew the IV was at the beginning of the
