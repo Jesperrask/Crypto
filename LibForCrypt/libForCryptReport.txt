@@ -1,0 +1,28 @@
+Approach:
+
+Not much to say about the implementations here, we followed all the mathematical definitions
+from wikipedia, and implemented them codewise.
+
+Extended euclidean algorithm was implemented by translating the pseudo code on wikipedia. We
+encountered a special case when the input x,y where equal, and we failed the testcase 5,5.
+Therefore we had to add an extra if-case: if(a == b){
+  int t = result[1];
+  result[1] = result[2];
+  result[2] = t;
+}
+
+In EulerPhi we counted all the numbers where the gcd with n was 1. We incremented the
+variable result +1, everytime we found a match.
+
+To find the modular inverse, we applied a brute force method.  We needed to calculate a positive n by
+calculating the value v. Then we applied the brute force search for a i, when the (i*v)%m == 1, then we have
+found our inverse.
+
+Fermat prime where implemented by using the pseudo-code that we found on wikipedia, not much more
+to say about that since its a pretty clear definition.
+
+The hashCP were calculated by subtracting unique probabilities.
+
+
+
+output: Passed all testsuits
